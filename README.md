@@ -33,7 +33,7 @@ Ce projet est un livre d'or permettant aux utilisateurs de laisser leurs avis et
 ## 💻 Installation
 1. **Cloner le dépôt**
    ```sh
-   git clone https://github.com/prenom-nom/livre-or.git
+   git clone https://github.com/scott-allo/livre-or.git
    ```
 2. **Configurer la base de données**
    - Importer le fichier SQL situé dans le dossier `/sql` dans phpMyAdmin.
