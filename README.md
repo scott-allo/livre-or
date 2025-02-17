@@ -1,53 +1,51 @@
-# Livre d'or
+# 📖 Livre d'or - Mariage de Anne & Brad
 
-## 📖 Description
-Ce projet est un livre d'or permettant aux utilisateurs de laisser des avis sur le site. Il est développé en PHP avec une gestion de base de données MySQL. Les utilisateurs peuvent s'inscrire, se connecter, modifier leur profil et poster des commentaires visibles par tous.
+## 📝 Description
+Ce projet est un livre d'or permettant aux utilisateurs de laisser leurs avis et messages sur le mariage fictif de **Anne et Brad**. Cette idée humoristique fait référence à l'histoire d'Anne, une femme qui a été arnaquée par un individu se faisant passer pour Brad Pitt. Nous avons décidé d'ajouter cette touche légère et décalée à notre projet. 😆
+
+## 🚀 Fonctionnalités
+- **Page d'accueil** présentant le mariage et l'événement 📜
+- **Inscription et connexion** pour permettre aux utilisateurs de laisser un message 🔑
+- **Modification du profil** avec possibilité de changer son login et son mot de passe ✏️
+- **Affichage des commentaires** du plus récent au plus ancien 🗣️
+- **Ajout de commentaires** pour les utilisateurs connectés 💬
+- **Recherche de commentaires** par mots-clés 🔍
+- **Pagination** pour une meilleure lisibilité 📄
 
 ## 🛠️ Technologies utilisées
-- **Langages** : PHP, HTML, CSS
-- **Base de données** : MySQL (gérée avec phpMyAdmin)
-- **Hébergement** : Plesk
-- **Gestion de versions** : GitHub
+- **Back-end :** PHP (Programmation Orientée Objet)
+- **Base de données :** MySQL (via phpMyAdmin)
+- **Front-end :** HTML, CSS
 
-## 📂 Structure du projet
+## 📂 Structure du dépôt
 ```
 /livreor
-│── /assets          → Images et ressources
-│── /css             → Fichiers CSS
-│── /models          → Classes PHP
-│   ├── Database.php → Connexion à la BDD
-│   ├── User.php     → Gestion des utilisateurs
-│   ├── Comment.php  → Gestion des commentaires
-│── /pages           → Pages du site
-│   ├── index.php        → Page d'accueil
-│   ├── register.php     → Inscription
-│   ├── login.php        → Connexion
-│   ├── profil.php       → Modification du profil
-│   ├── livre-or.php     → Affichage des commentaires
-│   ├── commentaire.php  → Ajout de commentaire
-│── /sql             → Fichier SQL
-│   ├── livreor.sql  → Structure et contenu de la BDD
-│── .gitignore       → Fichiers ignorés par Git
-│── README.md        → Explication du projet
-│── index.php        → Page principale
+│── /assets        → Contient les images et ressources
+│── /css           → Fichiers CSS pour le design
+│── /models        → Classes PHP pour la gestion des données
+│── /pages         → Fichiers accessibles par les utilisateurs
+│── /sql           → Script de création de la base de données
+│── .gitignore     → Fichiers à exclure du versionnement
+│── index.php      → Page d'accueil
+│── README.md      → Explication du projet
 ```
 
-## 📌 Fonctionnalités
-- Inscription et connexion des utilisateurs
-- Modification du profil (login et mot de passe)
-- Ajout de commentaires (uniquement pour les utilisateurs connectés)
-- Affichage du livre d’or avec pagination et recherche
-- Système de date pour les commentaires
-
-## 📦 Installation
-1. **Cloner le projet** :
-   ```bash
-   git clone https://github.com/ton-github/livre-or.git
+## 💻 Installation
+1. **Cloner le dépôt**
+   ```sh
+   git clone https://github.com/prenom-nom/livre-or.git
    ```
-2. **Importer la base de données** :
-   - Aller sur phpMyAdmin
-   - Créer une base de données `livreor`
-   - Importer le fichier `livreor.sql`
+2. **Configurer la base de données**
+   - Importer le fichier SQL situé dans le dossier `/sql` dans phpMyAdmin.
+   - Mettre à jour les informations de connexion à la BDD dans `Database.php`.
+3. **Démarrer le projet**
+   - Héberger les fichiers sur Plesk ou un serveur local (XAMPP, WAMP, MAMP).
+   - Accéder à `http://localhost/livreor/` pour commencer. 🚀
+
+## 🤝 Contribution
+- Créer une branche à partir de `develop`
+- Travailler sur la fonctionnalité et tester avant de proposer une fusion
+- Respecter la structure et la convention de code définies
 
 
 
