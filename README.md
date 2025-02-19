@@ -58,8 +58,9 @@ Ce projet est un livre d'or permettant aux utilisateurs de laisser leurs avis et
    - Importer le fichier SQL situé dans le dossier `/sql` dans phpMyAdmin.
    - Mettre à jour les informations de connexion à la BDD dans `Database.php`.
 3. **Démarrer le projet**
-   - Héberger les fichiers sur Plesk ou un serveur local (XAMPP, WAMP, MAMP).
-   - Accéder à `http://localhost/livreor/` pour commencer. 🚀
+   - En local : utiliser un serveur comme XAMPP, WAMP ou MAMP.
+   - En production : le projet sera hébergé sur Plesk.
+   - Accéder à http://localhost/livreor/ (en local) ou à l’URL définie sur Plesk. 🚀
 
 ## 🤝 Contribution
 
