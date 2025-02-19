@@ -12,7 +12,7 @@ require_once __DIR__ . '/../models/Database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livre d'or</title>
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="/livre-or/css/global.css"/>
 </head>
 <body>
     <p> Un formulaire d’ajout de commentaire (commentaire.php) : ce
