@@ -53,6 +53,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
+    <div class="body">
+            <header>
+                <?php
+                include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
+
+                ?>
+            </header>
+       
 
     <div class="auth-section">
         <h2>Connexion</h2>
