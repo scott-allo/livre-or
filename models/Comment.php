@@ -1,65 +1,53 @@
 <?php
 
 require_once __DIR__ . '/../models/Database.php';
+
 class Comment {
     private $pdo;
     private $table = "comments";
 
-    public $id;
-    public $topic_id;
-    public $comment_txt;
-
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
-    
-    // Créer une comment
-    public function create() {
+
+    // Ajouter un commentaire
+    public function create($id_user, $comment) {
         try {
-            $query = "INSERT INTO " . $this->table . " (topic_id, comment_txt) VALUES (:topic_id, :comment_txt)";
+            $query = "INSERT INTO " . $this->table . " (id_user, comment, date) VALUES (:id_user, :comment, NOW())";
             $stmt = $this->pdo->prepare($query);
 
-            // Sécuriser les entrées
-            $this->topic_id = htmlspecialchars(strip_tags($this->topic_id));
-            $this->comment_txt = htmlspecialchars(strip_tags($this->comment_txt));
-
-            $stmt->bindParam(":topic_id", $this->topic_id);
-            $stmt->bindParam(":comment_txt", $this->comment_txt);
+            $stmt->bindParam(":id_user", $id_user, PDO::PARAM_INT);
+            $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
-                return ["success" => true, "message" => "comment ajoutée avec succès."];
+                return ["success" => true, "message" => "Commentaire ajouté avec succès."];
             }
-            return ["success" => false, "message" => "Échec de l'ajout de la comment."];
+            return ["success" => false, "message" => "Échec de l'ajout du commentaire."];
         } catch (PDOException $e) {
             return ["success" => false, "message" => "Erreur SQL : " . $e->getMessage()];
         }
     }
 
-    // Lire toutes les comments
+    // Lire tous les commentaires
     public function read() {
         try {
-            $query = "SELECT * FROM " . $this->table;
+            $query = "SELECT * FROM " . $this->table . " ORDER BY date DESC";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
-            return $stmt;
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return ["success" => false, "message" => "Erreur lors de la récupération : " . $e->getMessage()];
         }
     }
 
-    // Mettre à jour un comment
-    public function update() {
+    // Mettre à jour un commentaire
+    public function update($id, $comment) {
         try {
-            $query = "UPDATE " . $this->table . " SET comment_txt = :comment_txt WHERE id = :id";
+            $query = "UPDATE " . $this->table . " SET comment = :comment WHERE id = :id";
             $stmt = $this->pdo->prepare($query);
 
-
-            $this->comment_txt = htmlspecialchars(strip_tags($this->comment_txt));
-            $this->id = htmlspecialchars(strip_tags($this->id));
-
-         
-            $stmt->bindParam(":comment_txt", $this->comment_txt);
-            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":comment", $comment, PDO::PARAM_STR);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 return ["success" => true, "message" => "Mise à jour réussie."];
@@ -70,14 +58,12 @@ class Comment {
         }
     }
 
-    // Supprimer un comment
-    public function delete() {
+    // Supprimer un commentaire
+    public function delete($id) {
         try {
             $query = "DELETE FROM " . $this->table . " WHERE id = :id";
             $stmt = $this->pdo->prepare($query);
-
-            $this->id = htmlspecialchars(strip_tags($this->id));
-            $stmt->bindParam(":id", $this->id);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 
             if ($stmt->execute()) {
                 return ["success" => true, "message" => "Suppression réussie."];

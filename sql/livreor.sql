@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 18 fév. 2025 à 09:16
+-- Généré le : mer. 19 fév. 2025 à 09:43
 -- Version du serveur : 8.0.40
 -- Version de PHP : 8.3.14
 
@@ -47,6 +47,16 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `login`, `password`) VALUES
+(1, 'moderator', 'Ioipb*(&(*^970'),
+(2, 'olivia.dondas@gmail.com', '$2y$10$MFuRMlvtgA8yfq7KaauKguS/GxDQdNP6m.kDj44q/aLRhQZye8hWy'),
+(3, 'zol', '$2y$10$4ro0GVaVA3ctfuCTTiAYSOReUL1tZhnkNHEJzSwSfehxzoqmVVoGm'),
+(4, 'mama', '$2y$10$b.RHXMbsWBYqmi33LZoEZ.qC/knYnq3KmDB4bc9FuZyVHgJr5zYmi');
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -76,7 +86,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
