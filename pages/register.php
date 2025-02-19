@@ -1,8 +1,11 @@
 <?php
+
+session_start();
+
 require_once __DIR__ . '/../models/Database.php';
 require_once __DIR__ . '/../models/User.php';
 
-$message = ''; // Initialisation du message
+$message = '';
 
 $database = new Database();
 $user = new User($database);
@@ -53,17 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
-    <div class="body">
-            <header>
-                <?php
-                include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
-
-                ?>
-            </header>
-       
+    <div class="content-wrapper">
+    <header>
+            <?php include __DIR__ . '/../models/Header.php'; ?>
+        </header>
+  <section id="auth">     
 
     <div class="auth-section">
-        <h2>Connexion</h2>
+        <h3>Connexion</h3>
         <p>Connectez-vous pour accéder à votre compte.</p>
 
         <!-- Formulaire de connexion -->
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="container">
-        <h2>Créer un compte</h2>
+        <h3>Créer un compte</h3>
         <form action="register.php" method="POST">
             <label for="username">Nom d'utilisateur :</label>
             <input type="text" name="username" id="username" required>
@@ -94,6 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
+    </section>
     <!-- Affichage des messages d'erreur ou de succès -->
     <?php if (!empty($message)) : ?>
         <p class="message"><?php echo $message; ?></p>

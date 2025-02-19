@@ -1,12 +1,13 @@
-
 /* GENERAL */
-   
-html{
+@import url("https://use.typekit.net/rkq5tdm.css");
+@import url("https://use.typekit.net/rkq5tdm.css");
+
+body {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
-  background-image:url(../assets/Accueil.jpg);
+  background-image: url(../assets/Accueil.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,148 +15,87 @@ html{
   height: 100vh;
 }
 
-
-body{
-  margin: 0;
-}
-
-
-.body{
+.content-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 80vw;
   height: 80vh;
-  background-color: #FFFFFF;
-  color: #1E1E1E;
-  font-family: GeosansLight;
+  background-color: #ffffff;
+  color: #1e1e1e;
   box-shadow: 0 0 10px #ffffff;
   overflow: scroll;
 }
 
-
-::selection{
+::selection {
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 ::-moz-selection {
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
-
-::placeholder{
-  font-family: GeosansLight;
-  color: #FFFFFF;
-}
-
-
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 
-
-@font-face{
-  font-family: GeosansLight;
-  src: url("police/geo_sans_light/GeosansLight.ttf")
-}
-
-
-@font-face{
-  font-family: Leiko;
-  src: url("police/leixo/LEIXO-DEMO.ttf")
-}
-
-
 /* HEADER */
 
-
-  header{
-      width: 100%;
-      height: 12vh;
-      background-color: #fc9191;
-  }
-
-
-  header nav{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      width: 100%;
-      height: 12vh;
-  }
-
-
-  header nav ul{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      list-style-type: none;
-      padding: 0;
-  }
-
-
-  header nav li{
-      padding: 10px 25px;
-      margin: 0 5px;
-  }
-
-
-  header nav li a{
-      font-size: 23px;
-      color: #FFFFFF;
-      text-decoration: none;
-      transition: transform .2s;
-  }
-
-
-  header nav li a:hover{
-      color: #000000;
-      transform: scale(1.5);
-      border-bottom: solid 1px #000000;
-  }
-
-
-  header nav img{
-      width: 10vh;
-  }
-
-
-
-/* ACCEUIL */
-
-
-#accueil{
+header {
   width: 100%;
-  height: 80vh;
+  height: 12vh;
+  background-color: #fc9191;
+}
+
+header nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
+  width: 100%;
+  height: 12vh;
+}
+
+header nav ul {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  background-image:url(../assets/Accueil.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  list-style-type: none;
+  padding: 0;
+  font-family: "mrs-eaves", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-variant-caps: small-caps;
 }
 
-
-#accueil h2{
-  padding: 20px;
-  text-align: center;
-  font-size: 70px;
-  font-family: Leiko;
-  color: #FFFFFF;
-  text-shadow: 0 0 10px #000000;
+header nav li {
+  padding: 10px 25px;
+  margin: 0 5px;
 }
 
+header nav li a {
+  font-size: 23px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+header nav li a:hover {
+  color: #000000;
+  transform: scale(1.5);
+  border-bottom: solid 1px #000000;
+}
+
+header nav img {
+  width: 10vh;
+}
 
 /* LIVRE D'OR */
 
-
-#livre_or{
+#livre_or {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -163,20 +103,18 @@ body{
   margin: 20px;
 }
 
-
-#ajout_commentaire{
+#ajout_commentaire {
   display: block;
   width: 50%;
   background-color: #22a1b0;
   padding: 10px;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 20px;
   text-align: center;
 }
 
-
-.commentaire{
+.commentaire {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,8 +123,7 @@ body{
   margin: 10px;
 }
 
-
-.commentaire_1{
+.commentaire_1 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -195,23 +132,19 @@ body{
   border-bottom: solid 1px #000000;
 }
 
-
-.commentaire_1 h3{
+.commentaire_1 h3 {
   margin: 0;
   padding: 0;
   font-size: 15px;
 }
 
-
-.commentaire_2{
+.commentaire_2 {
   padding: 5px;
 }
 
-
 /* COMMENTAIRE */
 
-
-#formulaire{
+#formulaire {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -219,8 +152,7 @@ body{
   justify-content: center;
 }
 
-
-#formulaire h2{
+#formulaire h2 {
   width: 60vw;
   padding: 15px;
   margin: 20px;
@@ -228,12 +160,11 @@ body{
   background-color: #22a1b0;
   font-family: GeosansLight;
   border: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
 }
 
-
-#formulaire form{
+#formulaire form {
   width: 60vw;
   margin: 0;
   display: flex;
@@ -242,12 +173,11 @@ body{
   justify-content: center;
 }
 
-#formulaire input[type=submit]{
+#formulaire input[type="submit"] {
   cursor: pointer;
 }
 
-
-#formulaire_2{
+#formulaire_2 {
   width: 100%;
   height: 30vh;
   padding: 15px;
@@ -256,12 +186,11 @@ body{
   background-color: #959595;
   font-family: GeosansLight;
   border: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   box-sizing: content-box;
 }
 
-
-#formulaire_3{
+#formulaire_3 {
   width: 100%;
   padding: 15px;
   margin: 20px;
@@ -269,15 +198,13 @@ body{
   background-color: #22a1b0;
   font-family: GeosansLight;
   border: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   box-sizing: content-box;
 }
-
 
 /* INSCRIPTION */
 
-
-#inscription{
+#inscription {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -285,8 +212,7 @@ body{
   justify-content: center;
 }
 
-
-#inscription form{
+#inscription form {
   width: 40vw;
   margin: 20px 0;
   display: flex;
@@ -295,12 +221,11 @@ body{
   justify-content: center;
 }
 
-#inscription input[type=submit]{
+#inscription input[type="submit"] {
   cursor: pointer;
 }
 
-
-.inscription_2{
+.inscription_2 {
   width: 100%;
   padding: 15px;
   margin: 20px;
@@ -308,20 +233,17 @@ body{
   background-color: #959595;
   font-family: GeosansLight;
   border: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   box-sizing: content-box;
 }
 
-
-.inscription_3{
+.inscription_3 {
   background-color: #22a1b0;
 }
-
 
 /* CONNEXION */
 
-
-#connexion{
+#connexion {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -329,8 +251,7 @@ body{
   justify-content: center;
 }
 
-
-#connexion form{
+#connexion form {
   width: 40vw;
   margin: 20px 0;
   display: flex;
@@ -339,12 +260,11 @@ body{
   justify-content: center;
 }
 
-#connexion input[type=submit]{
+#connexion input[type="submit"] {
   cursor: pointer;
 }
 
-
-.connexion_2{
+.connexion_2 {
   width: 100%;
   padding: 15px;
   margin: 20px;
@@ -352,20 +272,17 @@ body{
   background-color: #959595;
   font-family: GeosansLight;
   border: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   box-sizing: content-box;
 }
 
-
-.connexion_3{
+.connexion_3 {
   background-color: #22a1b0;
 }
 
-
 /* PROFIL */
 
-
-#compte{
+#compte {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -373,8 +290,7 @@ body{
   justify-content: center;
 }
 
-
-#compte form{
+#compte form {
   width: 40vw;
   margin: 20px 0;
   display: flex;
@@ -383,18 +299,16 @@ body{
   justify-content: center;
 }
 
-
-#compte input[type=submit]{
+#compte input[type="submit"] {
   cursor: pointer;
 }
 
-#compte label{
+#compte label {
   width: 100%;
   margin: auto;
 }
 
-
-.compte_2{
+.compte_2 {
   width: 100%;
   padding: 15px;
   margin: 20px;
@@ -402,11 +316,10 @@ body{
   background-color: #959595;
   font-family: GeosansLight;
   border: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   box-sizing: content-box;
 }
 
-
-.compte_3{
+.compte_3 {
   background-color: #22a1b0;
 }

@@ -1,0 +1,31 @@
+@import url("https://use.typekit.net/rkq5tdm.css");
+
+#accueil {
+  font-family: "rafaella", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: x-large;
+}
+
+/* ACCEUIL */
+
+#accueil {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../assets/Accueil.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#accueil h2 {
+  padding: 20px;
+  text-align: center;
+  font-size: 70px;
+  color: #ffffff;
+  text-shadow: 0 0 10px #000000;
+}
