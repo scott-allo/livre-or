@@ -1,0 +1,123 @@
+/* CONNEXION & INSCRIPTION */
+#auth {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  font-family: "mrs-eaves", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-variant-caps: small-caps;
+  padding: 20px;
+  box-sizing: border-box; /* Ajouté pour inclure padding et bordures dans la largeur */
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Ajouté pour gérer la taille du conteneur */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%; /* Force les champs à s'adapter au conteneur */
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* Important pour ne pas dépasser le conteneur */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-sizing: border-box; /* Pour ne pas dépasser */
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* MODAL STYLES */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000; /* Pour s'assurer que le modal est au-dessus du contenu */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  font-family: "mrs-eaves", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-variant-caps: small-caps;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.modal input[type="text"],
+.modal input[type="password"] {
+  width: 100%; /* Forcer la largeur des champs à s'ajuster */
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box; /* Inclure padding et bordures dans la largeur */
+}
+
+/* Modal close button */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+}
+
+/* Affichage du modal si ciblé */
+#register-modal:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Lien pour ouvrir le modal */
+.register-link {
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  cursor: pointer;
+}
