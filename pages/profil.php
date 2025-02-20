@@ -33,11 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/profil.css">
+    <link rel="stylesheet" href="/livre-or/css/global.css">
+    <link rel="stylesheet" href="/livre-or/css/profil.css">
     <title>Profil</title>
 </head>
 <body>
+    
     <section class="content-wrapper">
     <header>
                 <?php
@@ -61,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="submit">Mettre à jour</button>
     </form>
 
-    <a href="logout.php">Se déconnecter</a>
     </section>
 </body>
 </html>
