@@ -21,7 +21,7 @@
   
   form label {
     font-weight: bold;
-    color: #555;
+    color: #d57c7c;
   }
   
   form textarea,
@@ -48,7 +48,7 @@
   }
   
   form button:hover {
-    background-color: #555;
+    background-color: #d57c7c;
   }
   
   /* Table des commentaires */
@@ -81,7 +81,7 @@
   
   table td {
     font-size: 16px;
-    color: #555;
+    color: #d57c7c;
   }
   
   /* Message d'absence de commentaires */
