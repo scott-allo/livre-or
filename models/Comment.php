@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/Database.php';
+session_start(); // Démarrer la session
 
 class Comment {
     private $pdo;
@@ -10,8 +11,14 @@ class Comment {
         $this->pdo = $pdo;
     }
 
-    // Ajouter un commentaire
-    public function create($id_user, $comment) {
+    // Ajouter un commentaire (nécessite d'être connecté)
+    public function create($comment) {
+        if (!isset($_SESSION['user_id'])) {
+            return ["success" => false, "message" => "Vous devez être connecté pour ajouter un commentaire."];
+        }
+
+        $id_user = $_SESSION['user_id']; // Récupérer l'ID utilisateur depuis la session
+
         try {
             $query = "INSERT INTO " . $this->table . " (id_user, comment, date) VALUES (:id_user, :comment, NOW())";
             $stmt = $this->pdo->prepare($query);
@@ -36,7 +43,8 @@ class Comment {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return ["success" => false, "message" => "Erreur lors de la récupération : " . $e->getMessage()];
+            error_log("Erreur SQL : " . $e->getMessage());
+            return [];
         }
     }
 
