@@ -1,9 +1,8 @@
-
 <?php
-require_once '../models/Database.php';
-require_once '../models/User.php';
 
 session_start();
+require_once '../models/Database.php';
+require_once '../models/User.php';
 
 $database = new Database();
 $user = new User($database);
@@ -25,6 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $message = $user->updateUser($userId, $newLogin, $newPassword);
 }
+
+// Si l'utilisateur existe et que son nom est "moderator", afficher le bouton
+if ($userData && $userData['login'] === 'moderator') {
+    $showModeratorButton = true;
+} else {
+    $showModeratorButton = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/livre-or/css/global.css">
-    <link rel="stylesheet" href="/livre-or/css/profil.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/profil.css">
+
     <title>Profil</title>
 </head>
 <body>
@@ -43,13 +50,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <header>
                 <?php
                 include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
-
                 ?>
             </header>
     <h1>Profil de <?php echo htmlspecialchars($userData['login']); ?></h1>
 
     <?php if (isset($message)) : ?>
         <p><?php echo $message; ?></p>
+    <?php endif; ?>
+
+    <!-- Afficher le bouton de modérateur seulement si l'utilisateur est 'moderator' -->
+    <?php if ($showModeratorButton): ?>
+        <a href="moderateur.php"><button>Accéder à la page Modérateur</button></a>
     <?php endif; ?>
 
     <form method="post">
@@ -65,4 +76,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </section>
 </body>
 </html>
-
