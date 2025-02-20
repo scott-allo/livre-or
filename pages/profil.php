@@ -1,9 +1,8 @@
-
 <?php
-require_once '../models/Database.php';
-require_once '../models/User.php';
 
 session_start();
+require_once '../models/Database.php';
+require_once '../models/User.php';
 
 $database = new Database();
 $user = new User($database);
@@ -25,6 +24,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $message = $user->updateUser($userId, $newLogin, $newPassword);
 }
+
+// Si l'utilisateur existe et que son nom est "moderator", afficher le bouton
+if ($userData && $userData['login'] === 'moderator') {
+    $showModeratorButton = true;
+} else {
+    $showModeratorButton = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,20 +41,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/profil.css">
+
     <title>Profil</title>
 </head>
 <body>
+    
     <section class="content-wrapper">
     <header>
                 <?php
-                include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
-
+                require_once __DIR__ . '/../models/Header.php';
                 ?>
             </header>
     <h1>Profil de <?php echo htmlspecialchars($userData['login']); ?></h1>
 
     <?php if (isset($message)) : ?>
         <p><?php echo $message; ?></p>
+    <?php endif; ?>
+
+    <!-- Afficher le bouton de modérateur seulement si l'utilisateur est 'moderator' -->
+    <?php if ($showModeratorButton): ?>
+        <a href="moderateur.php"><button>Accéder à la page Modérateur</button></a>
     <?php endif; ?>
 
     <form method="post">
@@ -61,8 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="submit">Mettre à jour</button>
     </form>
 
-    <a href="logout.php">Se déconnecter</a>
     </section>
 </body>
 </html>
-
