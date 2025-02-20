@@ -1,23 +1,31 @@
 <?php
-require_once __DIR__ . '/../models/Database.php';
-
+    session_start();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livre d'or</title>
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="/livre-or/css/global.css"/>
+    <link rel="stylesheet" href="/livre-or/css/accueil.css"/>
+    <title>Accueil - Livre d'or</title>
+
 </head>
 <body>
-    <p> Anne & Brad </p>
-
-    <a href="profil.php">Profil</a>
-    <a href="commentaire.php">Commentaire</a>
-    <a href="register.php">Inscription</a>
-    <a href="livre-or.php">Livre d'or</a>
-</body>
+    
+        <div class="content-wrapper">
+            <header>
+                <?php include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php"); ?>
+            </header>
+       
+            <section id="accueil">
+                <?php
+                 
+                        echo "<h2>Livre d'or d'Anne & Brad</h2>";
+                    
+                ?>
+            </section>
+        </div>
+    </body>
 </html>

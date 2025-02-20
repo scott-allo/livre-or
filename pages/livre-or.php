@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Database.php';
+require_once __DIR__ . '/../models/Comment.php';
 
 ?>
 
@@ -10,9 +11,17 @@ require_once __DIR__ . '/../models/Database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livre d'or</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/livre-or/css/global.css">
 </head>
 <body>
+<div class="content-wrapper">
+            <header>
+                <?php
+                include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
+
+                ?>
+            </header>
+       
     <p> Voir tous les commentaires du livre d'or </p>
 
     Sur cette page

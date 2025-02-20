@@ -12,9 +12,17 @@ require_once __DIR__ . '/../models/Database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livre d'or</title>
-    <link rel="stylesheet" href="../css/global.css">
+
+    <link rel="stylesheet" href="/livre-or/css/global.css"/>
 </head>
 <body>
+<div class="commentaire">
+            <header>
+                <?php
+                include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
+
+                ?>
+
     <p> Un formulaire d’ajout de commentaire (commentaire.php) : ce
 formulaire ne contient qu’un champ permettant de rentrer son
 commentaire et un bouton de validation. Il n’est accessible qu’aux
