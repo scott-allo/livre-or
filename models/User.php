@@ -44,24 +44,18 @@ class User {
     // Fonction de connexion
     public function login($login, $password) {
         $login = trim(htmlspecialchars($login));
-
+    
         $sql = "SELECT id, login, password FROM user WHERE login = :login";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':login' => $login]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
         if ($user && password_verify($password, $user['password'])) {
             session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['login'] = $user['login'];
-
-            if ($user['login'] === 'moderator') {
-                header("Location: moderateur.php");
-                exit();
-            } else {
-                header("Location: profil.php");
-                exit();
-            }
+    
+            return "Connexion réussie";
         } else {
             return "Nom d'utilisateur ou mot de passe incorrect.";
         }
