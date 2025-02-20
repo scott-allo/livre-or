@@ -1,17 +1,24 @@
 <?php
 
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../models/Database.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../models/Database.php';
 
-$message = '';
-
+session_start();
 $database = new Database();
 $user = new User($database);
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    
+    $loginMessage = $user->login($username, $password);
+=======
 // Vérification de l'état de connexion
 if (isset($_SESSION['username'])) {
     // Si l'utilisateur est déjà connecté, redirection vers commentaire.php
@@ -23,22 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    if (isset($_POST['register'])) {
-        // Vérification des mots de passe
-        $confirmPassword = trim($_POST['confirm_password'] ?? '');
-        if ($password !== $confirmPassword) {
-            $message = "Les mots de passe ne correspondent pas.";
-        } else {
-            $message = $user->register($username, $password);
-            if ($message === "Inscription réussie") {
-                $message = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
-            }
-        }
-    } elseif (isset($_POST['login'])) {
-        // Connexion du modérateur
-        if ($username === "moderator" && $password === "Ioipb*(&(*^970") {
-            $_SESSION['username'] = "moderator";
+
+    if ($loginMessage === "Connexion réussie") {
+        if ($_SESSION['login'] === "moderator") {
             header("Location: moderateur.php");
+
+
             exit();
         }
 
@@ -48,9 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['username'] = $username;
             header("Location: commentaire.php"); // Redirection vers commentaire.php après connexion
             exit();
+
         } else {
-            $message = "Nom d'utilisateur ou mot de passe incorrect.";
+            header("Location: profil.php");
         }
+        exit();
+    } else {
+        echo $loginMessage; // Affiche le message d'erreur si connexion échoue
     }
 }
 ?>
