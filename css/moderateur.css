@@ -1,216 +1,189 @@
-/* RESET DE BASE */
+/* VARIABLES MODERNES */
+:root {
+  --beige-creme: #f8f5f2;
+  --taupe-doux: #e3ded9;
+  --terracotta: #c17c74;
+  --gris-chaud: #6d6a6f;
+  --poudre: #eee6e1;
+  --ombre-douce: rgba(109, 106, 111, 0.1);
+}
+
+/* RESET ÉLÉGANT */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Style global du body */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f0f0; /* Fond clair */
-  color: #333;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: var(--beige-creme);
+  color: var(--gris-chaud);
   line-height: 1.6;
+  min-height: 100vh;
 }
 
-/* Menu de navigation */
+/* NAVIGATION MINIMALISTE */
 nav {
-  background-color: #6200ea; /* Violet vibrant */
-  padding: 15px 20px;
+  background: var(--beige-creme);
+  padding: 1.5rem 2rem;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
+  box-shadow: 0 4px 20px var(--ombre-douce);
+  backdrop-filter: blur(8px);
   z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre portée légère */
 }
 
 nav ul {
-  list-style-type: none;
   display: flex;
-  justify-content: center; /* Centrer les éléments horizontalement */
-  gap: 30px; /* Espacement entre les liens */
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
 }
 
-nav ul li {
-  padding: 5px 10px;
-  border-radius: 8px; /* Coins arrondis */
-  transition: background-color 0.3s, transform 0.3s; /* Transitions douces */
-}
-
-nav ul li a {
-  color: white;
+nav a {
+  color: var(--gris-chaud);
   text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
 }
 
-nav ul li:hover {
-  background-color: #3700b3; /* Ombre plus foncée sur le survol */
-  transform: scale(1.05); /* Agrandir légèrement l'élément */
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--terracotta);
+  transition: width 0.3s ease;
 }
 
-nav ul li a:hover {
-  color: #ffeb3b; /* Changer la couleur du texte au survol */
+nav a:hover::after {
+  width: 100%;
 }
 
-/* Style du bouton de déconnexion */
-nav ul li a.logout {
-  color: #ff1744; /* Couleur de texte rouge vif pour déconnexion */
-}
-
-nav ul li a.logout:hover {
-  color: #ffffff; /* Blanc au survol */
-}
-
-/* Contenu principal */
+/* CONTENU PRINCIPAL */
 .content-wrapper {
-  margin-top: 80px; /* Espacement pour le menu fixe */
-  padding: 30px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre autour du contenu */
+  max-width: 1200px;
+  margin: 100px auto 40px;
+  padding: 3rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--ombre-douce);
 }
 
-/* Table des commentaires */
+h1 {
+  color: var(--gris-chaud);
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -0.03em;
+}
+
+/* TABLEAU ÉLÉGANT */
 table {
   width: 100%;
-  margin-top: 20px;
   border-collapse: collapse;
-  border-radius: 8px;
-  overflow: hidden;
+  background: white;
+  margin: 2rem 0;
 }
 
-table thead {
-  background-color: #6200ea; /* Violet de l'entête */
-  color: white;
+thead {
+  border-bottom: 2px solid var(--taupe-doux);
 }
 
-table th,
-table td {
-  padding: 15px;
+th {
+  padding: 1.2rem;
+  color: var(--gris-chaud);
+  font-weight: 400;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
-table tr:hover {
-  background-color: #f1f1f1; /* Effet de survol pour les lignes */
+td {
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--taupe-doux);
 }
 
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background: var(--poudre);
+}
+
+/* BOUTONS RAFFINÉS */
 button {
-  background-color: #ff1744; /* Bouton rouge vif */
+  background: var(--terracotta);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  font-weight: 400;
+  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 button:hover {
-  background-color: #d50000; /* Rouge plus foncé sur survol */
-  transform: scale(1.05); /* Agrandir légèrement */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(193, 124, 116, 0.2);
 }
 
-button:focus {
-  outline: none;
+button:active {
+  transform: translateY(0);
 }
 
-/* Messages de succès ou erreur */
+/* MESSAGES DÉLICATS */
 .success-message {
-  color: #388e3c; /* Vert pour succès */
-  font-weight: bold;
-  margin-top: 20px;
+  background: rgba(193, 124, 116, 0.1);
+  color: var(--terracotta);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--terracotta);
 }
 
-.error-message {
-  color: #f44336; /* Rouge pour erreur */
-  font-weight: bold;
+.confirmation-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px var(--ombre-douce);
+  margin: 2rem 0;
 }
 
-/* ------------------------ MEDIA QUERIES POUR RENDRE RESPONSIF ------------------------ */
-
-/* Pour les écrans de taille moyenne (tablettes, smartphones en paysage) */
-@media (max-width: 1024px) {
-  nav ul {
-    gap: 15px; /* Espacement plus petit */
-  }
-
-  nav ul li {
-    padding: 5px 8px;
-  }
-
-  nav ul li a {
-    font-size: 16px; /* Réduction de la taille des liens */
-  }
-
-  table th,
-  table td {
-    padding: 12px; /* Réduction de la taille du padding dans le tableau */
-  }
-
-  button {
-    padding: 8px 15px; /* Boutons un peu plus petits */
-  }
+.confirm-btn {
+  background: var(--terracotta);
+  color: white;
 }
 
-/* Pour les écrans plus petits (smartphones en portrait) */
-@media (max-width: 600px) {
-  nav ul {
-    flex-direction: column; /* Mettre les liens du menu en colonne */
-    align-items: center; /* Centrer les éléments */
-    gap: 20px; /* Espacement entre les liens */
-  }
+.cancel-btn {
+  background: transparent;
+  color: var(--gris-chaud);
+  border: 1px solid var(--taupe-doux);
+}
 
-  nav ul li {
-    width: 100%; /* Les éléments de menu occupent toute la largeur */
-    text-align: center; /* Centrer le texte des éléments de menu */
-  }
-
-  nav ul li a {
-    font-size: 14px; /* Réduction de la taille des liens sur les petits écrans */
-  }
-
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
   .content-wrapper {
-    padding: 20px; /* Réduction du padding pour les petits écrans */
+    padding: 2rem;
+    margin: 80px 1rem 2rem;
   }
 
-  table th,
-  table td {
-    padding: 10px; /* Réduction de la taille du padding dans le tableau */
+  nav ul {
+    gap: 1rem;
   }
 
-  button {
-    padding: 6px 12px; /* Boutons encore plus petits */
-  }
-
-  .success-message,
-  .error-message {
-    font-size: 14px; /* Réduction de la taille des messages */
+  table {
+    font-size: 0.9rem;
   }
 }
 
-/* Pour les très petits écrans (smartphones ultra compacts) */
-@media (max-width: 400px) {
-  nav ul li {
-    padding: 5px 8px;
-  }
-
-  nav ul li a {
-    font-size: 12px; /* Plus petit pour les très petits écrans */
-  }
-
-  .content-wrapper {
-    padding: 15px; /* Moins de padding pour les écrans ultra compacts */
-  }
-
-  table th,
-  table td {
-    padding: 8px; /* Encore plus petit pour les petites tables */
-  }
-
-  button {
-    padding: 5px 10px; /* Taille de bouton ultra compacte */
-  }
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:wght@400;500&display=swap");
