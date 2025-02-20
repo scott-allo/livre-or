@@ -44,13 +44,13 @@ if (!empty($_GET['search'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livre d'or</title>
-    <link rel="stylesheet" href="/livre-or/css/global.css">
-    <link rel="stylesheet" href="/livre-or/css/livre-or.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/livre-or.css">
 </head>
 <body>
 <div class="content-wrapper">
     <header>
-        <?php include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php"); ?>
+    <?php require_once __DIR__ . '/../models/Header.php'; ?>
     </header>
 
     <h2>Bienvenue sur le livre d'or</h2>
