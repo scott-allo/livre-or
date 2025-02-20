@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/Database.php';
+require_once __DIR__ . '/../models/Comment.php';
 
 ?>
 
@@ -13,7 +14,7 @@ require_once __DIR__ . '/../models/Database.php';
     <link rel="stylesheet" href="/livre-or/css/global.css">
 </head>
 <body>
-<div class="body">
+<div class="content-wrapper">
             <header>
                 <?php
                 include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");

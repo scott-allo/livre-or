@@ -66,5 +66,35 @@ class User {
             return "Nom d'utilisateur ou mot de passe incorrect.";
         }
     }
+
+    public function getUserById($id) {
+        $sql = "SELECT id, login FROM user WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateUser($id, $newLogin, $newPassword) {
+        if (empty($newLogin) || empty($newPassword)) {
+            return "Veuillez remplir tous les champs.";
+        }
+    
+        $newLogin = trim(htmlspecialchars($newLogin));
+        $hashed_password = password_hash($newPassword, PASSWORD_BCRYPT);
+    
+        $sql = "UPDATE user SET login = :login, password = :password WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->execute([
+                ':login' => $newLogin,
+                ':password' => $hashed_password,
+                ':id' => $id,
+            ]);
+            return "Profil mis à jour avec succès !";
+        } catch (PDOException $e) {
+            return "Erreur lors de la mise à jour : " . $e->getMessage();
+        }
+    }
 }
 ?>
