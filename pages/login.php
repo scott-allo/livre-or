@@ -1,6 +1,6 @@
 <?php
 
-
+// Démarrer la session si elle n'est pas déjà démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -8,53 +8,48 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Database.php';
 
-session_start();
+// Initialisation des objets de base de données et utilisateur
 $database = new Database();
 $user = new User($database);
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    $loginMessage = $user->login($username, $password);
-=======
-// Vérification de l'état de connexion
+// Vérification de l'état de connexion : rediriger si déjà connecté
 if (isset($_SESSION['username'])) {
-    // Si l'utilisateur est déjà connecté, redirection vers commentaire.php
     header("Location: commentaire.php");
     exit();
 }
 
+$message = ''; // Initialisation de la variable pour stocker les messages
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Récupération et nettoyage des entrées
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-
-    if ($loginMessage === "Connexion réussie") {
-        if ($_SESSION['login'] === "moderator") {
-            header("Location: moderateur.php");
-
-
-            exit();
-        }
-
-        // Connexion des utilisateurs normaux
+    if (!empty($username) && !empty($password)) {
+        // Appel de la fonction de connexion
         $loginMessage = $user->login($username, $password);
+
         if ($loginMessage === "Connexion réussie") {
             $_SESSION['username'] = $username;
-            header("Location: commentaire.php"); // Redirection vers commentaire.php après connexion
-            exit();
 
+            // Vérifier le rôle et rediriger
+            if ($_SESSION['login'] === "moderator") {
+                header("Location: moderateur.php");
+                exit();
+            }
+
+            // Redirection pour les utilisateurs normaux
+            header("Location: livre-or.php");
+            exit();
         } else {
-            header("Location: profil.php");
+            $message = $loginMessage; // Affichage du message d'erreur
         }
-        exit();
     } else {
-        echo $loginMessage; // Affiche le message d'erreur si connexion échoue
+        $message = "Veuillez remplir tous les champs.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -89,6 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <!-- Lien pour ouvrir le modal d'inscription -->
                 <a href="#register-modal" class="register-link">Créer un compte</a>
+
+                <!-- Affichage des messages d'erreur ou de succès -->
+                <?php if (!empty($message)) : ?>
+                    <p class="message"><?php echo htmlspecialchars($message); ?></p>
+                <?php endif; ?>
             </div>
         </section>
 
@@ -111,11 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </form>
             </div>
         </div>
-
-        <!-- Affichage des messages d'erreur ou de succès -->
-        <?php if (!empty($message)) : ?>
-            <p class="message"><?php echo htmlspecialchars($message); ?></p>
-        <?php endif; ?>
     </div>
 </body>
 </html>
