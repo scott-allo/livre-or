@@ -50,7 +50,7 @@ if (!empty($_GET['search'])) {
 <body>
 <div class="content-wrapper">
     <header>
-        <?php include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php"); ?>
+    <?php require_once __DIR__ . '/../models/Header.php'; ?>
     </header>
 
     <h2>Bienvenue sur le livre d'or</h2>

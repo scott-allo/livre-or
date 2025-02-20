@@ -49,7 +49,7 @@ if ($userData && $userData['login'] === 'moderator') {
     <section class="content-wrapper">
     <header>
                 <?php
-                include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php");
+                require_once __DIR__ . '/../models/Header.php';
                 ?>
             </header>
     <h1>Profil de <?php echo htmlspecialchars($userData['login']); ?></h1>
