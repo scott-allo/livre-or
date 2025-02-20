@@ -7,8 +7,8 @@
             if(!isset($_SESSION['login']) || !isset($_SESSION['password']))
             {
                 echo '
-                    <li><a href="login.php">Connexion</a></li>
-                    <li><a href="inscription.php">Inscription</a></li>
+                    <li><a href="login.php">Profil</a></li>
+                    
                 ';
             }
             else
