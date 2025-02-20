@@ -1,11 +1,14 @@
 <?php
 
 require_once __DIR__ . '/../models/Database.php';
-session_start(); // Démarrer la session
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 class Comment {
     private $pdo;
-    private $table = "comments";
+    private $table = "comment";
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
@@ -35,10 +38,13 @@ class Comment {
         }
     }
 
-    // Lire tous les commentaires
     public function read() {
         try {
-            $query = "SELECT * FROM " . $this->table . " ORDER BY date DESC";
+            $query = "
+                SELECT c.id, u.login, c.comment, c.date 
+                FROM " . $this->table . " c
+                JOIN user u ON c.id_user = u.id
+                ORDER BY c.date DESC";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,6 +53,8 @@ class Comment {
             return [];
         }
     }
+    
+    
 
     // Mettre à jour un commentaire
     public function update($id, $comment) {
@@ -81,4 +89,23 @@ class Comment {
             return ["success" => false, "message" => "Erreur SQL : " . $e->getMessage()];
         }
     }
+
+    public function search($keyword) {
+        try {
+            $query = "
+                SELECT c.id, u.login, c.comment, c.date 
+                FROM " . $this->table . " c
+                JOIN user u ON c.id_user = u.id
+                WHERE c.comment LIKE :keyword
+                ORDER BY c.date DESC";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':keyword', '%' . $keyword . '%', PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erreur SQL : " . $e->getMessage());
+            return [];
+        }
+    }
+    
 }
