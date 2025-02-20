@@ -40,7 +40,7 @@ if (!empty($_GET['search'])) {
 
     <?php if (isset($_SESSION['user_id'])): ?>
         <!-- Formulaire pour écrire un commentaire -->
-        <form method="POST" action="ajouter-commentaire.php">
+        <form method="POST" action="add_comment.php">
             <textarea name="commentaire" placeholder="Écrivez votre commentaire ici..." required></textarea>
             <button type="submit">Envoyer</button>
         </form>
