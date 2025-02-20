@@ -1,0 +1,216 @@
+/* RESET DE BASE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style global du body */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0; /* Fond clair */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Menu de navigation */
+nav {
+  background-color: #6200ea; /* Violet vibrant */
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre portée légère */
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center; /* Centrer les éléments horizontalement */
+  gap: 30px; /* Espacement entre les liens */
+}
+
+nav ul li {
+  padding: 5px 10px;
+  border-radius: 8px; /* Coins arrondis */
+  transition: background-color 0.3s, transform 0.3s; /* Transitions douces */
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+nav ul li:hover {
+  background-color: #3700b3; /* Ombre plus foncée sur le survol */
+  transform: scale(1.05); /* Agrandir légèrement l'élément */
+}
+
+nav ul li a:hover {
+  color: #ffeb3b; /* Changer la couleur du texte au survol */
+}
+
+/* Style du bouton de déconnexion */
+nav ul li a.logout {
+  color: #ff1744; /* Couleur de texte rouge vif pour déconnexion */
+}
+
+nav ul li a.logout:hover {
+  color: #ffffff; /* Blanc au survol */
+}
+
+/* Contenu principal */
+.content-wrapper {
+  margin-top: 80px; /* Espacement pour le menu fixe */
+  padding: 30px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre autour du contenu */
+}
+
+/* Table des commentaires */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table thead {
+  background-color: #6200ea; /* Violet de l'entête */
+  color: white;
+}
+
+table th,
+table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+  background-color: #f1f1f1; /* Effet de survol pour les lignes */
+}
+
+button {
+  background-color: #ff1744; /* Bouton rouge vif */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: #d50000; /* Rouge plus foncé sur survol */
+  transform: scale(1.05); /* Agrandir légèrement */
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Messages de succès ou erreur */
+.success-message {
+  color: #388e3c; /* Vert pour succès */
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.error-message {
+  color: #f44336; /* Rouge pour erreur */
+  font-weight: bold;
+}
+
+/* ------------------------ MEDIA QUERIES POUR RENDRE RESPONSIF ------------------------ */
+
+/* Pour les écrans de taille moyenne (tablettes, smartphones en paysage) */
+@media (max-width: 1024px) {
+  nav ul {
+    gap: 15px; /* Espacement plus petit */
+  }
+
+  nav ul li {
+    padding: 5px 8px;
+  }
+
+  nav ul li a {
+    font-size: 16px; /* Réduction de la taille des liens */
+  }
+
+  table th,
+  table td {
+    padding: 12px; /* Réduction de la taille du padding dans le tableau */
+  }
+
+  button {
+    padding: 8px 15px; /* Boutons un peu plus petits */
+  }
+}
+
+/* Pour les écrans plus petits (smartphones en portrait) */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column; /* Mettre les liens du menu en colonne */
+    align-items: center; /* Centrer les éléments */
+    gap: 20px; /* Espacement entre les liens */
+  }
+
+  nav ul li {
+    width: 100%; /* Les éléments de menu occupent toute la largeur */
+    text-align: center; /* Centrer le texte des éléments de menu */
+  }
+
+  nav ul li a {
+    font-size: 14px; /* Réduction de la taille des liens sur les petits écrans */
+  }
+
+  .content-wrapper {
+    padding: 20px; /* Réduction du padding pour les petits écrans */
+  }
+
+  table th,
+  table td {
+    padding: 10px; /* Réduction de la taille du padding dans le tableau */
+  }
+
+  button {
+    padding: 6px 12px; /* Boutons encore plus petits */
+  }
+
+  .success-message,
+  .error-message {
+    font-size: 14px; /* Réduction de la taille des messages */
+  }
+}
+
+/* Pour les très petits écrans (smartphones ultra compacts) */
+@media (max-width: 400px) {
+  nav ul li {
+    padding: 5px 8px;
+  }
+
+  nav ul li a {
+    font-size: 12px; /* Plus petit pour les très petits écrans */
+  }
+
+  .content-wrapper {
+    padding: 15px; /* Moins de padding pour les écrans ultra compacts */
+  }
+
+  table th,
+  table td {
+    padding: 8px; /* Encore plus petit pour les petites tables */
+  }
+
+  button {
+    padding: 5px 10px; /* Taille de bouton ultra compacte */
+  }
+}

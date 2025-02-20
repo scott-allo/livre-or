@@ -1,59 +1,55 @@
 <?php
 
+// Démarrer la session si elle n'est pas déjà démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../models/Database.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../models/Database.php';
 
-$message = '';
-
+// Initialisation des objets de base de données et utilisateur
 $database = new Database();
 $user = new User($database);
 
-// Vérification de l'état de connexion
+// Vérification de l'état de connexion : rediriger si déjà connecté
 if (isset($_SESSION['username'])) {
-    // Si l'utilisateur est déjà connecté, redirection vers commentaire.php
     header("Location: commentaire.php");
     exit();
 }
 
+$message = ''; // Initialisation de la variable pour stocker les messages
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Récupération et nettoyage des entrées
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    if (isset($_POST['register'])) {
-        // Vérification des mots de passe
-        $confirmPassword = trim($_POST['confirm_password'] ?? '');
-        if ($password !== $confirmPassword) {
-            $message = "Les mots de passe ne correspondent pas.";
-        } else {
-            $message = $user->register($username, $password);
-            if ($message === "Inscription réussie") {
-                $message = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
-            }
-        }
-    } elseif (isset($_POST['login'])) {
-        // Connexion du modérateur
-        if ($username === "moderator" && $password === "Ioipb*(&(*^970") {
-            $_SESSION['username'] = "moderator";
-            header("Location: moderateur.php");
-            exit();
-        }
-
-        // Connexion des utilisateurs normaux
+    if (!empty($username) && !empty($password)) {
+        // Appel de la fonction de connexion
         $loginMessage = $user->login($username, $password);
+
         if ($loginMessage === "Connexion réussie") {
             $_SESSION['username'] = $username;
-            header("Location: commentaire.php"); // Redirection vers commentaire.php après connexion
+
+            // Vérifier le rôle et rediriger
+            if ($_SESSION['login'] === "moderator") {
+                header("Location: moderateur.php");
+                exit();
+            }
+
+            // Redirection pour les utilisateurs normaux
+            header("Location: livre-or.php");
             exit();
         } else {
-            $message = "Nom d'utilisateur ou mot de passe incorrect.";
+            $message = $loginMessage; // Affichage du message d'erreur
         }
+    } else {
+        $message = "Veuillez remplir tous les champs.";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -88,6 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <!-- Lien pour ouvrir le modal d'inscription -->
                 <a href="#register-modal" class="register-link">Créer un compte</a>
+
+                <!-- Affichage des messages d'erreur ou de succès -->
+                <?php if (!empty($message)) : ?>
+                    <p class="message"><?php echo htmlspecialchars($message); ?></p>
+                <?php endif; ?>
             </div>
         </section>
 
@@ -110,11 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </form>
             </div>
         </div>
-
-        <!-- Affichage des messages d'erreur ou de succès -->
-        <?php if (!empty($message)) : ?>
-            <p class="message"><?php echo htmlspecialchars($message); ?></p>
-        <?php endif; ?>
     </div>
 </body>
 </html>

@@ -20,6 +20,23 @@ if (!empty($_GET['search'])) {
 } else {
     $comment = $commentModel->read();
 }
+// Pagination
+$commentsPerPage = 4; // Nombre de commentaires par page
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+$offset = ($page - 1) * $commentsPerPage;
+
+// Récupération du nombre total de commentaires
+$totalCommentaires = $commentModel->countComments();
+$commentairesParPage = 4;
+$totalPages = ceil($totalCommentaires / $commentairesParPage);
+
+// Récupération des commentaires avec pagination
+if (!empty($_GET['search'])) {
+    $comment = $commentModel->search($searchQuery, $commentsPerPage, $offset);
+} else {
+    $comment = $commentModel->read($commentsPerPage, $offset);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,13 +57,14 @@ if (!empty($_GET['search'])) {
 
     <?php if (isset($_SESSION['user_id'])): ?>
         <!-- Formulaire pour écrire un commentaire -->
-        <form method="POST" action="ajouter-commentaire.php">
+        <form method="POST" action="add_comment.php">
             <textarea name="commentaire" placeholder="Écrivez votre commentaire ici..." required></textarea>
             <button type="submit">Envoyer</button>
         </form>
     <?php else: ?>
         <p>Veuillez vous connecter pour écrire un commentaire.</p>
     <?php endif; ?>
+    
 
     <!-- Recherche par mot-clé -->
     <form action="livre-or.php" method="GET">
@@ -79,6 +97,20 @@ if (!empty($_GET['search'])) {
         <?php endif; ?>
         </tbody>
     </table>
+    <!-- Liens de pagination -->
+<div class="pagination">
+    <?php if ($page > 1): ?>
+        <a href="?page=<?= $page - 1; ?>&search=<?= urlencode($searchQuery) ?>">Précédent</a>
+    <?php endif; ?>
+
+    Page <?= $page; ?> / <?= $totalPages; ?>
+
+    <?php if ($page < $totalPages): ?>
+        <a href="?page=<?= $page + 1; ?>&search=<?= urlencode($searchQuery) ?>">Suivant</a>
+    <?php endif; ?>
 </div>
+</div>
+
+
 </body>
 </html>
