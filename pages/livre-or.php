@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Connexion à la base
+
 $database = new Database();
 $db = $database->getConnection();
 $commentModel = new Comment($db);
@@ -21,16 +21,16 @@ if (!empty($_GET['search'])) {
     $comment = $commentModel->read();
 }
 // Pagination
-$commentsPerPage = 4; // Nombre de commentaires par page
+$commentsPerPage = 4; 
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = ($page - 1) * $commentsPerPage;
 
-// Récupération du nombre total de commentaires
+
 $totalCommentaires = $commentModel->countComments();
 $commentairesParPage = 4;
 $totalPages = ceil($totalCommentaires / $commentairesParPage);
 
-// Récupération des commentaires avec pagination
+
 if (!empty($_GET['search'])) {
     $comment = $commentModel->search($searchQuery, $commentsPerPage, $offset);
 } else {

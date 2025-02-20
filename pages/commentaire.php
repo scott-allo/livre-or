@@ -7,19 +7,19 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Vérification de la connexion
+
 if (!isset($_SESSION['user_id'])) {
     // Si l'utilisateur n'est pas connecté, redirection vers livre-or.php
     header("Location: livre-or.php");
     exit();
 }
 
-// Connexion à la base
+
 $database = new Database();
 $db = $database->getConnection();
 $commentModel = new Comment($db);
 
-// Si le formulaire est soumis
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['comment'])) {
     $newComment = htmlspecialchars($_POST['comment']);
     $result = $commentModel->create($newComment);
@@ -49,12 +49,12 @@ $comments = $commentModel->read();
         <?php include($_SERVER['DOCUMENT_ROOT'] . "/livre-or/models/Header.php"); ?>
     </header>
 
-    <!-- Message de retour après ajout de commentaire -->
+   
     <?php if (isset($message)): ?>
         <p class="message"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
-    <!-- Formulaire pour écrire un commentaire -->
+    
     <form action="commentaire.php" method="POST">
         <label for="comment">Votre commentaire :</label>
         <textarea id="comment" name="comment" required></textarea>
