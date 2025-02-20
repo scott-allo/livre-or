@@ -42,9 +42,9 @@ $comments = $commentModel->read();
 <!-- Menu de navigation -->
 <nav>
     <ul>
-        <li><a href="/livre-or/index.php">Retour au site</a></li>
-        <li><a href="/livre-or/pages/moderateur.php">Gestion des commentaires</a></li>
-        <li><a href="/livre-or/pages/logout.php">Déconnexion</a></li>
+        <li><a href="../index.php">Retour au site</a></li>
+        <li><a href="../pages/moderateur.php">Gestion des commentaires</a></li>
+        <li><a href="../pages/logout.php">Déconnexion</a></li>
     </ul>
 </nav>
 

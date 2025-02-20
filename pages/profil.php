@@ -52,6 +52,9 @@ if ($userData && $userData['login'] === 'moderator') {
                 require_once __DIR__ . '/../models/Header.php';
                 ?>
             </header>
+
+
+    <div class="profil">    
     <h1>Profil de <?php echo htmlspecialchars($userData['login']); ?></h1>
 
     <?php if (isset($message)) : ?>
@@ -72,7 +75,7 @@ if ($userData && $userData['login'] === 'moderator') {
         
         <button type="submit">Mettre à jour</button>
     </form>
-
+    </div>
     </section>
 </body>
 </html>
