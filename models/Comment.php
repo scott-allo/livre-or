@@ -35,22 +35,39 @@ class Comment {
             return ["success" => false, "message" => "Erreur SQL : " . $e->getMessage()];
         }
     }
-
-    public function read() {
+    public function read($limit = 4, $offset = 0) {
         try {
             $query = "
                 SELECT c.id, u.login, c.comment, c.date 
                 FROM " . $this->table . " c
                 JOIN user u ON c.id_user = u.id
-                ORDER BY c.date DESC";
+                ORDER BY c.date DESC 
+                LIMIT :limit OFFSET :offset";
+    
             $stmt = $this->pdo->prepare($query);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
             $stmt->execute();
+    
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Erreur SQL : " . $e->getMessage());
             return [];
         }
     }
+    public function countComments() {
+        try {
+            $query = "SELECT COUNT(*) as total FROM " . $this->table;
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            error_log("Erreur SQL : " . $e->getMessage());
+            return 0;
+        }
+    }
+    
     
     
 
