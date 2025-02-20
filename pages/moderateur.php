@@ -1,10 +1,11 @@
 <?php
+session_start();
 
 require_once __DIR__ . '/../models/Database.php';
 require_once __DIR__ . '/../models/Comment.php';
 require_once __DIR__ . '/../models/User.php';
 
-// Vérifie si l'utilisateur est connecté (modifie selon ta logique)
+// Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
@@ -16,20 +17,15 @@ $db = $database->getConnection();
 $commentModel = new Comment($db);
 
 // Suppression d'un commentaire si demandé
+$message = '';
 if (isset($_POST['delete_id'])) {
     $deleteResult = $commentModel->delete($_POST['delete_id']);
-    echo $deleteResult['message'];
+    // Message après suppression
+    $message = $deleteResult['message']; // Assure-toi que delete() retourne ce message
 }
 
 // Récupérer et afficher les commentaires
 $comments = $commentModel->read();
-foreach ($comments as $comment) {
-    echo "<p>" . htmlspecialchars($comment['comment']) . "</p>";
-    echo "<form method='POST'>
-            <input type='hidden' name='delete_id' value='" . $comment['id'] . "'>
-            <button type='submit'>Supprimer</button>
-          </form>";
-}
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +35,7 @@ foreach ($comments as $comment) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des commentaires</title>
     <link rel="stylesheet" href="/livre-or/css/moderateur.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -47,7 +44,6 @@ foreach ($comments as $comment) {
     <ul>
         <li><a href="/livre-or/index.php">Retour au site</a></li>
         <li><a href="/livre-or/pages/moderateur.php">Gestion des commentaires</a></li>
-        <li><a href="/livre-or/pages/profile.php">Mon profil</a></li>
         <li><a href="/livre-or/pages/logout.php">Déconnexion</a></li>
     </ul>
 </nav>
@@ -55,10 +51,7 @@ foreach ($comments as $comment) {
 <div class="content-wrapper">
     <h1>Modération des commentaires</h1>
 
-    <?php if (isset($message)): ?>
-        <p class="success-message"><?= htmlspecialchars($message) ?></p>
-    <?php endif; ?>
-
+    <!-- Affichage du message après la table -->
     <table>
         <thead>
             <tr>
@@ -72,7 +65,7 @@ foreach ($comments as $comment) {
             <?php if (!empty($comments)): ?>
                 <?php foreach ($comments as $comment): ?>
                     <tr>
-                        <td><?= htmlspecialchars($comment['id_user']) ?></td>
+                        <td><?= htmlspecialchars($comment['login']) ?></td>
                         <td><?= htmlspecialchars($comment['comment']) ?></td>
                         <td><?= htmlspecialchars($comment['date']) ?></td>
                         <td>
@@ -90,6 +83,11 @@ foreach ($comments as $comment) {
             <?php endif; ?>
         </tbody>
     </table>
+
+    <!-- Affichage du message de succès ou d'erreur après suppression -->
+    <?php if (!empty($message)): ?>
+        <p class="success-message"><?= htmlspecialchars($message) ?></p>
+    <?php endif; ?>
 </div>
 
 </body>
