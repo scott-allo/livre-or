@@ -1,5 +1,10 @@
 <?php
 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Database.php';
 
@@ -7,15 +12,40 @@ session_start();
 $database = new Database();
 $user = new User($database);
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
     $loginMessage = $user->login($username, $password);
+=======
+// Vérification de l'état de connexion
+if (isset($_SESSION['username'])) {
+    // Si l'utilisateur est déjà connecté, redirection vers commentaire.php
+    header("Location: commentaire.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
 
     if ($loginMessage === "Connexion réussie") {
         if ($_SESSION['login'] === "moderator") {
             header("Location: moderateur.php");
+
+
+            exit();
+        }
+
+        // Connexion des utilisateurs normaux
+        $loginMessage = $user->login($username, $password);
+        if ($loginMessage === "Connexion réussie") {
+            $_SESSION['username'] = $username;
+            header("Location: commentaire.php"); // Redirection vers commentaire.php après connexion
+            exit();
+
         } else {
             header("Location: profil.php");
         }
@@ -34,7 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Inscription & Connexion</title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/login.css">
-    
 </head>
 <body>
     <div class="content-wrapper">
