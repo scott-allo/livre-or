@@ -1,0 +1,127 @@
+/* Styles spécifiques pour la page Livre d'Or */
+@import url("https://use.typekit.net/rkq5tdm.css");
+@import url("https://use.typekit.net/rkq5tdm.css");
+
+  /* Titres */
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fc9191;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Formulaire d'ajout de commentaire */
+  form {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  form label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  form textarea,
+  form input[type="text"] {
+    width: 700px;
+    max-width: 600px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  form button {
+    align-self: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #fc9191;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  form button:hover {
+    background-color: #555;
+  }
+  
+  /* Table des commentaires */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #fc9191;
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  table td {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  /* Message d'absence de commentaires */
+  table td[colspan="3"] {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+  }
+  
+  /* Champs de recherche */
+  form input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  form input[type="text"]:focus {
+    border-color: #fc9191;
+    outline: none;
+  }
+  
+  /* Bouton de recherche */
+  form button[type="submit"] {
+    margin-top: 10px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding: 10px;
+    }
+  
+    form textarea,
+    form input[type="text"] {
+      width: 100%;
+    }
+  
+    table th,
+    table td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
