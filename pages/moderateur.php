@@ -34,7 +34,7 @@ $comments = $commentModel->read();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des commentaires</title>
-    <link rel="stylesheet" href="/livre-or/css/moderateur.css">
+    <link rel="stylesheet" href="../css/moderateur.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
