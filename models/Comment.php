@@ -35,20 +35,28 @@ class Comment {
             return ["success" => false, "message" => "Erreur SQL : " . $e->getMessage()];
         }
     }
-    public function read($limit = 4, $offset = 0) {
+    public function read($limit = 4, $isModeratorPage = false) {
         try {
+            // La requête de base pour obtenir les commentaires
             $query = "
                 SELECT c.id, u.login, c.comment, c.date 
                 FROM " . $this->table . " c
                 JOIN user u ON c.id_user = u.id
-                ORDER BY c.date DESC 
-                LIMIT :limit OFFSET :offset";
+                ORDER BY c.date DESC";
+    
+            // Si ce n'est pas la page modérateur, ajouter la limite
+            if (!$isModeratorPage) {
+                $query .= " LIMIT :limit";
+            }
     
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-            $stmt->execute();
     
+            // Si ce n'est pas la page modérateur, on applique la limite
+            if (!$isModeratorPage) {
+                $stmt->bindParam(":limit", $limit, PDO::PARAM_INT);
+            }
+    
+            $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Erreur SQL : " . $e->getMessage());

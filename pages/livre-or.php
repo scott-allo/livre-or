@@ -7,7 +7,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
 $database = new Database();
 $db = $database->getConnection();
 $commentModel = new Comment($db);
@@ -15,26 +14,29 @@ $commentModel = new Comment($db);
 // Traitement de la recherche
 $searchQuery = '';
 if (!empty($_GET['search'])) {
-    $searchQuery = htmlspecialchars($_GET['search']); // Protection contre les injections XSS
-    $comment = $commentModel->search($searchQuery);
-} else {
-    $comment = $commentModel->read();
+    $searchQuery = htmlspecialchars($_GET['search']);
 }
+
 // Pagination
-$commentsPerPage = 4; 
+$commentsPerPage = 4;  // Limite à 4 commentaires par page
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
 $offset = ($page - 1) * $commentsPerPage;
 
+// Calcul du total de commentaires pour afficher la pagination
+$totalCommentaires = $commentModel->countComments($searchQuery);
+$totalPages = ceil($totalCommentaires / $commentsPerPage);
 
-$totalCommentaires = $commentModel->countComments();
-$commentairesParPage = 4;
-$totalPages = ceil($totalCommentaires / $commentairesParPage);
-
-
-if (!empty($_GET['search'])) {
+// Récupérer les commentaires avec ou sans pagination
+if (!empty($searchQuery)) {
     $comment = $commentModel->search($searchQuery, $commentsPerPage, $offset);
 } else {
-    $comment = $commentModel->read($commentsPerPage, $offset);
+    // Pour la page modérateur, on affiche tous les commentaires sans pagination
+    $isModeratorPage = isset($_GET['moderator']) && $_GET['moderator'] === 'true'; // Par exemple, un paramètre dans l'URL pour détecter la page modérateur
+    if ($isModeratorPage) {
+        $comment = $commentModel->read(); // Sans limite, pour afficher tous les commentaires
+    } else {
+        $comment = $commentModel->read($commentsPerPage, $offset);
+    }
 }
 
 ?>
@@ -56,7 +58,6 @@ if (!empty($_GET['search'])) {
     <h2>Bienvenue sur le livre d'or</h2>
 
     <?php if (isset($_SESSION['user_id'])): ?>
-        <!-- Formulaire pour écrire un commentaire -->
         <form method="POST" action="add_comment.php">
             <textarea name="commentaire" placeholder="Écrivez votre commentaire ici..." required></textarea>
             <button type="submit">Envoyer</button>
@@ -65,14 +66,11 @@ if (!empty($_GET['search'])) {
         <p>Veuillez vous connecter pour écrire un commentaire.</p>
     <?php endif; ?>
     
-
-    <!-- Recherche par mot-clé -->
     <form action="livre-or.php" method="GET">
         <input type="text" name="search" placeholder="Rechercher un commentaire" value="<?= htmlspecialchars($searchQuery) ?>">
         <button type="submit">Rechercher</button>
     </form>
 
-    <!-- Affichage des commentaires -->
     <table>
         <thead>
             <tr>
@@ -97,20 +95,21 @@ if (!empty($_GET['search'])) {
         <?php endif; ?>
         </tbody>
     </table>
+
     <!-- Liens de pagination -->
-<div class="pagination">
-    <?php if ($page > 1): ?>
-        <a href="?page=<?= $page - 1; ?>&search=<?= urlencode($searchQuery) ?>">Précédent</a>
-    <?php endif; ?>
+    <?php if (!$isModeratorPage): ?>
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?= $page - 1; ?>&search=<?= urlencode($searchQuery) ?>">Précédent</a>
+            <?php endif; ?>
 
-    Page <?= $page; ?> / <?= $totalPages; ?>
+            Page <?= $page; ?> / <?= $totalPages; ?>
 
-    <?php if ($page < $totalPages): ?>
-        <a href="?page=<?= $page + 1; ?>&search=<?= urlencode($searchQuery) ?>">Suivant</a>
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?= $page + 1; ?>&search=<?= urlencode($searchQuery) ?>">Suivant</a>
+            <?php endif; ?>
+        </div>
     <?php endif; ?>
 </div>
-</div>
-
-
 </body>
 </html>

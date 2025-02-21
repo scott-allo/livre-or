@@ -24,8 +24,12 @@ if (isset($_POST['delete_id'])) {
     $message = $deleteResult['message']; // Assure-toi que delete() retourne ce message
 }
 
-// Récupérer et afficher les commentaires
-$comments = $commentModel->read();
+
+// Sur la page modérateur, on passe 'true' pour ne pas appliquer de limite
+$comments = $commentModel->read(10, true);  // 10 est une limite arbitraire qui ne sera pas utilisée ici
+
+
+
 ?>
 
 <!DOCTYPE html>
