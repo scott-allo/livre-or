@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Vérification de la connexion de l'utilisateur
+   
     if (!isset($_SESSION['user_id'])) {
         echo "Vous devez être connecté pour ajouter un commentaire.";
         exit;
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Récupération et validation du commentaire
+   
     $commentContent = trim($_POST['commentaire']); // Supprime les espaces au début et à la fin
 
     if (empty($commentContent)) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Connexion à la base de données
+   
     $database = new Database();
     $db = $database->getConnection();
     $commentModel = new Comment($db);

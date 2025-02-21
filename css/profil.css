@@ -1,95 +1,73 @@
-/* profil.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
-  margin: 0;
-  padding: 0;
+@import url("https://use.typekit.net/rkq5tdm.css");
+
+.profil {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.content-wrapper {
-  width: 50%;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 40%; /* Réduit la largeur */
+  max-width: 400px; /* Taille plus petite */
+  margin: 50px auto; /* Ajustement du centrage */
+  padding: 30px; /* Moins d'espace */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-bottom: 100px;
+ 
 }
 
-header {
-  background-color: #e89c9c;
-  padding: 15px;
-  text-align: center;
-  border-radius: 10px 10px 0 0;
-}
-
-header a {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
+/* Style du titre */
+.profil h1 {
+  font-size: 24px; /* Légèrement réduit */
   font-weight: bold;
+  color: #fc9191;;
+  margin-bottom: 15px;
 }
 
-h1 {
-  color: #d57c7c;
-  margin-bottom: 20px;
-}
-
-.formform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-form {
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-label {
+/* Style des labels */
+.profil label {
+  font-size: 16px; /* Réduction de la taille */
   font-weight: bold;
-  margin-top: 10px;
-  color: #d57c7c;
+  color: #fc9191;;
+  display: block;
   text-align: left;
   width: 100%;
+  margin-bottom: 5px;
 }
 
-input {
-  width: 100%;
+/* Champs de saisie */
+.profil input {
+  font-size: 14px; /* Un peu plus petit */
   padding: 8px;
-  margin-top: 5px;
+  width: 100%;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 6px;
   box-sizing: border-box;
+  margin-bottom: 12px;
 }
 
-button {
-  margin-top: 15px;
-  background-color: #e89c9c;
+/* Style du bouton */
+.profil button {
+  font-size: 16px; /* Taille réduite */
+  padding: 10px 15px;
+  background-color: #fc9191;;
   color: white;
   border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
 }
 
-button:hover {
+.profil button:hover {
   background-color: #d57c7c;
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-p {
-  text-align: center;
+/* Message de confirmation ou d'erreur */
+.profil p {
   color: green;
   font-weight: bold;
+  margin-top: 10px;
 }

@@ -1,6 +1,6 @@
 <?php
 
-// Démarrer la session si elle n'est pas déjà démarrée
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -8,11 +8,11 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../models/Database.php';
 
-// Initialisation des objets de base de données et utilisateur
+
 $database = new Database();
 $user = new User($database);
 
-// Vérification de l'état de connexion : rediriger si déjà connecté
+
 if (isset($_SESSION['username'])) {
     header("Location: commentaire.php");
     exit();
@@ -38,11 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 exit();
             }
 
-            // Redirection pour les utilisateurs normaux
+           
             header("Location: livre-or.php");
             exit();
         } else {
-            $message = $loginMessage; // Affichage du message d'erreur
+            $message = $loginMessage; 
         }
     } else {
         $message = "Veuillez remplir tous les champs.";
