@@ -9,7 +9,7 @@ class Database {
 
         try {
             $this->conn = new PDO(
-                "mysql:host=localhost;dbname=livreor",
+                "mysql:host=localhost;dbname=olivia-dondas_livreor",
                 "root",
                 "root",
                 [
